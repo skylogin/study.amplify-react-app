@@ -1,7 +1,7 @@
 import React from 'react';
 
-import Continer from './Container';
-import protectedRoute from './protectedRoute';
+import Continer from '../components/Container';
+import protectedRoute from '../Hooks/protectedRoute';
 
 
 function Protected(props){

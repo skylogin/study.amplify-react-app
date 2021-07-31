@@ -2,9 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { HashRouter, Switch, Route } from 'react-router-dom';
 
 import Nav from './Nav';
-import Public from './Public';
-import Profile from './Profile';
-import Protected from './Protected';
+import Public from '../../pages/Public';
+import Profile from '../../pages/Profile';
+import Protected from '../../pages/Protected';
 
 
 const Router = () => {
