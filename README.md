@@ -1,5 +1,4 @@
 # study.amplify-react-app
 
-* react
-* graphql
-* aws amplify
+* noteapp: note crud
+* basic-authentication: public/protected route using aws cognito (by aws amplify)
