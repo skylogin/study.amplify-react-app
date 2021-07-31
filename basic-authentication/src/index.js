@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
 
-import Router from './Router';
+import Router from './components/Router';
 import 'antd/dist/antd.css';
 import Amplify from 'aws-amplify';
 import config from './aws-exports';
