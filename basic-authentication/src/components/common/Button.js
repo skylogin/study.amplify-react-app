@@ -2,7 +2,7 @@ import React from 'react';
 
 export default function Button({ onClick, title }) {
     return (
-        <button style={StyleSheet.button} onClick={onCLick}>
+        <button style={styles.button} onClick={onClick}>
             {title}
         </button>
     )
