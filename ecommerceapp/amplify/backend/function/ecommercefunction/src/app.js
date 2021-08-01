@@ -32,9 +32,14 @@ const docClient = new AWS.DynamoDB.DocumentClient({ region });
 var express = require('express')
 var bodyParser = require('body-parser')
 var awsServerlessExpressMiddleware = require('aws-serverless-express/middleware')
+const cors = require('cors');
+
+
+
 
 // declare a new express app
 var app = express()
+app.use(cors());
 app.use(bodyParser.json())
 app.use(awsServerlessExpressMiddleware.eventContext())
 
@@ -42,6 +47,7 @@ app.use(awsServerlessExpressMiddleware.eventContext())
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*")
   res.header("Access-Control-Allow-Headers", "*")
+  res.header("Access-Control-Allow-Credentials", true)
   next()
 });
 
@@ -98,12 +104,10 @@ async function getItems(){
 
 
 
-/**********************
- * Example get method *
- **********************/
 
-app.get('/products', function(req, res) {
-  // Add your code here
+
+
+app.get('/products', async function(req, res) {
   try{
     const data = await getItems();
     res.json({ data: data });
@@ -112,25 +116,16 @@ app.get('/products', function(req, res) {
   }
 });
 
-app.get('/products/*', function(req, res) {
-  // Add your code here
-  res.json({success: 'get call succeed!', url: req.url});
-});
-
-/****************************
-* Example post method *
-****************************/
-
-app.post('/products', function(req, res) {
-  // Add your code here
+app.post('/products', async function(req, res) {
   const { body } = req;
   const { event } = req.apiGateway;
 
   try{
-    await canPerformAction(event, 'Admin');
+    // cognito 관련 인증부분에서 에러가 남
+    // await canPerformAction(event, 'Admin');
     const input = { ...body, id: uuid() };
     var params = {
-      TableName: ddb_table_name_name,
+      TableName: ddb_table_name,
       Item: input
     }
     await docClient.put(params).promise();
@@ -140,31 +135,7 @@ app.post('/products', function(req, res) {
   }
 });
 
-app.post('/products/*', function(req, res) {
-  // Add your code here
-  res.json({success: 'post call succeed!', url: req.url, body: req.body})
-});
-
-/****************************
-* Example put method *
-****************************/
-
-app.put('/products', function(req, res) {
-  // Add your code here
-  res.json({success: 'put call succeed!', url: req.url, body: req.body})
-});
-
-app.put('/products/*', function(req, res) {
-  // Add your code here
-  res.json({success: 'put call succeed!', url: req.url, body: req.body})
-});
-
-/****************************
-* Example delete method *
-****************************/
-
-app.delete('/products', function(req, res) {
-  // Add your code here
+app.delete('/products', async function(req, res) {
   const { event } = req.apiGateway;
   try{
     await canPerformAction(event, 'Admin');
@@ -179,10 +150,7 @@ app.delete('/products', function(req, res) {
   }
 });
 
-app.delete('/products/*', function(req, res) {
-  // Add your code here
-  res.json({success: 'delete call succeed!', url: req.url});
-});
+
 
 app.listen(3000, function() {
     console.log("App started")
