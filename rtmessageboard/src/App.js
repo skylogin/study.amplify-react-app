@@ -72,13 +72,14 @@ function App() {
       }
       <Button type="primary" onClick={createMessage}>Create Message</Button>
       {
-        messages.map(message => (
+        messages.slice(0).reverse().map(message => (
           <div
             key={message.id}
             style={{...messageStyle, backgroundColor: message.color}}
           >
             <div style={messageBg}>
               <p style={messageTitle}>{message.title}</p>
+              <p>{message.createAt}</p>
             </div>
           </div>
         ))
