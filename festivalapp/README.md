@@ -1,4 +1,4 @@
-# labmda-trigger
+# festival app
 
 * react
 * graphql
