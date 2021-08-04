@@ -1,8 +1,0 @@
-{
-    "CreateAPIKey": 1,
-    "AppSyncApiName": "notesapi",
-    "DynamoDBBillingMode": "PAY_PER_REQUEST",
-    "DynamoDBEnableServerSideEncryption": false,
-    "S3DeploymentBucket": "amplify-notesapp-dev-224743-deployment",
-    "S3DeploymentRootKey": "amplify-appsync-files/ef722fd9550c561f6e9b39d6d5fc417cd6783556"
-}
